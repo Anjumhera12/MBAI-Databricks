@@ -1,0 +1,4 @@
+
+**Log in to Databricks**: 
+
+Navigate to the Catalog and access Delta Sharing. 

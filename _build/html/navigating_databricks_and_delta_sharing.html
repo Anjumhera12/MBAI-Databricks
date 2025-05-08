@@ -1,0 +1,1177 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="./">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="prev" title="Databricks documentation" href="index.html" />
+
+    <!-- Generated with Sphinx 8.2.3 and Furo 2024.08.06 -->
+        <title>Navigating Databricks and Delta Sharing - Databricks 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=302659d7" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">Databricks 1.0 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  
+  <span class="sidebar-brand-text">Databricks 1.0 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Navigating Databricks and Delta Sharing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#creating-and-sharing-catalogs">Creating and Sharing Catalogs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#share-data">Share Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#managing-the-key-vault">Managing the key vault</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#managing-auth-token">Managing Auth token</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#retrieving-the-token-for-the-client">Retrieving the Token for the Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#process-enrichment-data">Process Enrichment Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#monitoring">Monitoring</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="_sources/navigating_databricks_and_delta_sharing.rst.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="navigating-databricks-and-delta-sharing">
+<h1>Navigating Databricks and Delta Sharing<a class="headerlink" href="#navigating-databricks-and-delta-sharing" title="Link to this heading"></a></h1>
+<p><strong>Log in to Databricks</strong>:</p>
+<ul class="simple">
+<li><p>Navigate to the Catalog and access Delta Sharing.</p></li>
+</ul>
+<figure class="align-default">
+<img alt="_images/1.png" src="_images/1.png" />
+</figure>
+<section id="retrieve-the-sharing-identifier">
+<h2>Retrieve the Sharing Identifier<a class="headerlink" href="#retrieve-the-sharing-identifier" title="Link to this heading"></a></h2>
+<p>Click on <strong>Shared with me</strong> and then copy the Sharing Identifier. Each client has a unique identifier.</p>
+<p><strong>Note:</strong> Clients must share using the main ID as the client ID. This helps identify shares and map them to the correct client ID.</p>
+<figure class="align-default">
+<img alt="_images/2.png" src="_images/2.png" />
+</figure>
+</section>
+</section>
+<section id="creating-and-sharing-catalogs">
+<h1>Creating and Sharing Catalogs<a class="headerlink" href="#creating-and-sharing-catalogs" title="Link to this heading"></a></h1>
+<section id="create-separate-catalogs">
+<h2>Create Separate Catalogs<a class="headerlink" href="#create-separate-catalogs" title="Link to this heading"></a></h2>
+<p>A separate catalog must be created for each client to share their data and results. Each workspace can contain multiple catalogs.</p>
+<p>Create a new catalog by going into the <strong>Catalog</strong> → <strong>Create catalog</strong>. Catalog name should match with client_id provided by Matchbook AI.</p>
+<figure class="align-default">
+<img alt="_images/3.png" src="_images/3.png" />
+</figure>
+<p>Provide an appropriate catalog name along with storage location based on your external location and click <strong>Create</strong>.</p>
+<figure class="align-default">
+<img alt="_images/4.png" src="_images/4.png" />
+</figure>
+<p>Create a new Personal Access Token to call the Databricks API. Go to <strong>Settings</strong>.</p>
+<figure class="align-default">
+<img alt="_images/5.png" src="_images/5.png" />
+</figure>
+<p>From the left pane, select <strong>Developer</strong>.</p>
+<figure class="align-default">
+<img alt="_images/6.png" src="_images/6.png" />
+</figure>
+<p>Now, click <strong>Manage</strong>.</p>
+<figure class="align-default">
+<img alt="_images/7.png" src="_images/7.png" />
+</figure>
+<p>Then, click on <strong>Generate new token</strong>.</p>
+<figure class="align-default">
+<img alt="_images/8.png" src="_images/8.png" />
+</figure>
+<p>Note the generated access token and click on <strong>Done</strong>.</p>
+<figure class="align-default">
+<img alt="_images/9.png" src="_images/9.png" />
+</figure>
+<p>Next, store the previously created Access Token in the compute cluster. To do this you will require the details listed below:</p>
+<ul class="simple">
+<li><p><strong>DATABRICKS_HOST</strong>: This is an URL of your <strong>Databricks Instance URL</strong>.</p></li>
+<li><p><strong>DATABRICKS_TOKEN</strong>: Previously created Personal <strong>Access Token</strong>.</p></li>
+<li><p><strong>DATABRICKS_CLUSTER_ID</strong>: Compute Id.</p></li>
+</ul>
+<p>Go to the <strong>Compute</strong> → <strong>Your Cluster</strong> → <strong>View JSON</strong>.</p>
+<figure class="align-default">
+<img alt="_images/10.png" src="_images/10.png" />
+</figure>
+<p>A JSON file opens, where you can view <strong>cluster id</strong>.</p>
+<figure class="align-default">
+<img alt="_images/11.png" src="_images/11.png" />
+</figure>
+<p>Go to the <strong>Compute</strong> → <strong>Your Cluster</strong> → <strong>Advance Options</strong> .</p>
+<figure class="align-default">
+<img alt="_images/12.png" src="_images/12.png" />
+</figure>
+<p>Once Advanced options is opened, click on <strong>Spark</strong> then two sections <strong>Spark config</strong> and <strong>Environment Variables</strong> are displayed.</p>
+<figure class="align-default">
+<img alt="_images/13.png" src="_images/13.png" />
+</figure>
+<p>Go to the <strong>2 - Onboarding - Cleansematch</strong>, fill values and run the script by clicking on the <strong>Run all</strong> button.</p>
+<figure class="align-default">
+<img alt="_images/14.png" src="_images/14.png" />
+</figure>
+<div class="table-wrapper docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Required</p></th>
+<th class="head"><p>Data Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>client_id</p></td>
+<td><p>Yes</p></td>
+<td><p>String</p></td>
+<td><p>Uniquely identifies different clients in delta sharing mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p>source_schema</p></td>
+<td><p>Yes</p></td>
+<td><p>String</p></td>
+<td><p>Name of schema where source data is available.</p></td>
+</tr>
+<tr class="row-even"><td><p>source_table</p></td>
+<td><p>Yes</p></td>
+<td><p>String</p></td>
+<td><p>Name of table in which source data is available to do the matching.</p></td>
+</tr>
+<tr class="row-odd"><td><p>destination_schema</p></td>
+<td><p>Yes</p></td>
+<td><p>String</p></td>
+<td><p>Name of schema where you want to store match output data.</p></td>
+</tr>
+<tr class="row-even"><td><p>destination_table</p></td>
+<td><p>Yes</p></td>
+<td><p>String</p></td>
+<td><p>Name of table where you want to store match output data.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Batch_size</p></td>
+<td><p>Yes</p></td>
+<td><p>String</p></td>
+<td><p>Size of batch, allows parallel Matchbook API calls; must be between 1 to 50.</p></td>
+</tr>
+<tr class="row-even"><td><p>delta_sharing_mode</p></td>
+<td><p>No</p></td>
+<td><p>String</p></td>
+<td><p>If running in delta sharing mode, pass this parameter; otherwise, do not include it.</p></td>
+</tr>
+<tr class="row-odd"><td><p>tags</p></td>
+<td><p>No</p></td>
+<td><p>String</p></td>
+<td><p>Optional tags to include in the Matchbook API call.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Go to the <strong>3 - Onboarding - Download Matched Data</strong>, fill values and run the script by clicking on the <strong>Run all</strong> button.</p>
+<figure class="align-default">
+<img alt="_images/15.png" src="_images/15.png" />
+</figure>
+<div class="table-wrapper docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Required</p></th>
+<th class="head"><p>Data Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>client_id</p></td>
+<td><p>Yes</p></td>
+<td><p>String</p></td>
+<td><p>Uniquely identifies different clients in delta sharing mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p>source_schema</p></td>
+<td><p>Yes</p></td>
+<td><p>String</p></td>
+<td><p>Name of schema where we want to store the match output stage data.</p></td>
+</tr>
+<tr class="row-even"><td><p>source_table</p></td>
+<td><p>Yes</p></td>
+<td><p>String</p></td>
+<td><p>Name of table in which we want to store the match output stage data.</p></td>
+</tr>
+<tr class="row-odd"><td><p>destination_schema</p></td>
+<td><p>Yes</p></td>
+<td><p>String</p></td>
+<td><p>Name of schema where match output data is available.</p></td>
+</tr>
+<tr class="row-even"><td><p>destination_table</p></td>
+<td><p>Yes</p></td>
+<td><p>String</p></td>
+<td><p>Name of table where match output data is available.</p></td>
+</tr>
+<tr class="row-odd"><td><p>batch_size</p></td>
+<td><p>Yes</p></td>
+<td><p>String</p></td>
+<td><p>Size of batch; allows parallel Matchbook API calls. Must be between 1 to 50.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Go to the <strong>4 - Onboarding - Process Enrichment Data</strong>, fill values and run the script by clicking on the <strong>Run all</strong> button.</p>
+<figure class="align-default">
+<img alt="_images/16.png" src="_images/16.png" />
+</figure>
+<div class="table-wrapper docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Required</p></th>
+<th class="head"><p>Data Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>client_id</p></td>
+<td><p>Yes</p></td>
+<td><p>String</p></td>
+<td><p>Uniquely identifies different clients in delta sharing mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p>source_schema</p></td>
+<td><p>Yes</p></td>
+<td><p>String</p></td>
+<td><p>Name of schema where match output data is available.</p></td>
+</tr>
+<tr class="row-even"><td><p>source_table</p></td>
+<td><p>Yes</p></td>
+<td><p>String</p></td>
+<td><p>Name of table where match output data is available.</p></td>
+</tr>
+<tr class="row-odd"><td><p>destination_schema</p></td>
+<td><p>Yes</p></td>
+<td><p>String</p></td>
+<td><p>Name of schema where you want to store the enrichment data.</p></td>
+</tr>
+<tr class="row-even"><td><p>destination_table</p></td>
+<td><p>Yes</p></td>
+<td><p>String</p></td>
+<td><p>Name of table where you want to store the enrichment data.</p></td>
+</tr>
+<tr class="row-odd"><td><p>batch_size</p></td>
+<td><p>Yes</p></td>
+<td><p>String</p></td>
+<td><p>Size of batch; this allows processing data in chunks.</p></td>
+</tr>
+<tr class="row-even"><td><p>enrichment_types</p></td>
+<td><p>Yes</p></td>
+<td><p>String</p></td>
+<td><p>Type of enrichments you want to consider for processing.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Go to the <strong>5 - Onboarding - Secrets</strong>, fill values and run the script by clicking on the <strong>Run all</strong> button.</p>
+<figure class="align-default">
+<img alt="_images/17.png" src="_images/17.png" />
+</figure>
+<div class="table-wrapper docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Data Type</p></th>
+<th class="head"><p>Retrieval</p></th>
+<th class="head"><p>Usage</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>api_key</p></td>
+<td><p>string</p></td>
+<td><p>Matchbook AI portal</p></td>
+<td><p>Required to call Matchbook AI APIs.</p></td>
+</tr>
+<tr class="row-odd"><td><p>api_secret</p></td>
+<td><p>string</p></td>
+<td><p>Matchbook AI portal</p></td>
+<td><p>Required to call Matchbook AI APIs.</p></td>
+</tr>
+<tr class="row-even"><td><p>api_url</p></td>
+<td><p>string</p></td>
+<td><p><a class="reference external" href="https://api.my.matchbookservices.com">https://api.my.matchbookservices.com</a></p></td>
+<td><p>Required to call Matchbook AI APIs.</p></td>
+</tr>
+<tr class="row-odd"><td><p>auth_token</p></td>
+<td><p>string</p></td>
+<td><p>Databricks portal</p></td>
+<td><p>Required to call Databricks’ REST APIs. Used to trigger Process Enrichment Data job from Cleansematch &amp; Download Matched Data.</p></td>
+</tr>
+<tr class="row-even"><td><p>catalog</p></td>
+<td><p>string</p></td>
+<td><p>Databricks portal</p></td>
+<td><p>Unity catalog name where input data is available.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>If mode is delta sharing, then catalog belongs to where you want to store your output results.</p></li>
+<li><p>If mode is direct then, then catalog belongs to where your input data is available and want to store the output result as well.</p></li>
+</ul>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td><p>column_mapping</p></td>
+<td><p>string</p></td>
+<td><p>Custom</p></td>
+<td><p>Workflow needs to call Matchbook API with specific fields, if your data does not have exact columns then you can create a mapping where you can map your columns to Matchbook AI’s conventions.</p></td>
+</tr>
+<tr class="row-even"><td><p>databricks_instance_url</p></td>
+<td><p>string</p></td>
+<td><p>Databricks portal</p></td>
+<td><p>Required to call Databricks’ REST APIs.</p></td>
+</tr>
+<tr class="row-odd"><td><p>delta_sharing_identifier</p></td>
+<td><p>string</p></td>
+<td><p>Databricks portal</p></td>
+<td><p>Required only in delta sharing mode. Optional otherwise.</p></td>
+</tr>
+<tr class="row-even"><td><p>job_id</p></td>
+<td><p>string</p></td>
+<td><p>Databricks portal</p></td>
+<td><p>This job id belongs to the Process Enrichment Data. Go to the Process Enrichment Data workflow.</p></td>
+</tr>
+<tr class="row-odd"><td><p>primary_key</p></td>
+<td><p>string</p></td>
+<td><p>Input dataset</p></td>
+<td><p>Column name from source data which is uniquely identified across entire dataset. This is needed to properly functions jobs, making updates in the dataset, etc.</p></td>
+</tr>
+<tr class="row-even"><td><p>subdomain</p></td>
+<td><p>string</p></td>
+<td><p>Matchbook AI portal</p></td>
+<td><p>Required to call Matchbook AI APIs. We pass it in the API call while retrieving token.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Note</strong>:
+1. Under job id, Go to the Process Enrichment Data workflow.</p>
+<figure class="align-default">
+<img alt="_images/18.png" src="_images/18.png" />
+</figure>
+<ol class="arabic simple" start="2">
+<li><p>Copy the job Id from below:</p></li>
+</ol>
+<figure class="align-default">
+<img alt="_images/19.png" src="_images/19.png" />
+</figure>
+</section>
+<section id="task-scheduling-workflows">
+<h2>Task Scheduling / Workflows<a class="headerlink" href="#task-scheduling-workflows" title="Link to this heading"></a></h2>
+<p>To streamline data operations and ensure high-quality, enriched records, our Databricks environment leverages three key <strong>automated workflows</strong>. Each workflow plays a specific role in the data pipeline from matching and cleansing to enrichment and downstream delivery.</p>
+<p>The three different workflows are:</p>
+<ol class="arabic simple">
+<li><p><strong>Cleansematch workflow</strong></p></li>
+</ol>
+<p>This workflow handles the initial preparation and entity resolution process. It standardizes incoming records, removes duplicates, and performs intelligent matching against reference data (such as D&amp;B or internal golden records).</p>
+<ol class="arabic simple" start="2">
+<li><p><strong>Download Matched Data workflow</strong></p></li>
+</ol>
+<p>Once matching is complete, this workflow retrieves and stores the matched output in a structured format. It organizes the data for easy querying, analytics, or handoff to other systems.</p>
+<ol class="arabic simple" start="3">
+<li><p><strong>Process Enrichment Data workflow</strong></p></li>
+</ol>
+<p>This workflow applies data enrichment by appending additional attributes (e.g., firmographics, hierarchy data, or industry codes) from third-party sources like D&amp;B. It enhances the matched data with rich context to support better decision-making.</p>
+<section id="how-to-start-the-workflow">
+<h3><em>How to start the workflow</em><a class="headerlink" href="#how-to-start-the-workflow" title="Link to this heading"></a></h3>
+<p>To start the workflow, simply click the <strong>play</strong> button located on the right side of the workflow row in the Databricks interface.</p>
+<figure class="align-default">
+<img alt="_images/20.png" src="_images/20.png" />
+</figure>
+</section>
+<section id="how-to-schedule-recurring-workflow-run">
+<h3><em>How to schedule recurring workflow run</em><a class="headerlink" href="#how-to-schedule-recurring-workflow-run" title="Link to this heading"></a></h3>
+<p>Click on the workflow in which you need to set up a recurring run.</p>
+<figure class="align-default">
+<img alt="_images/21.png" src="_images/21.png" />
+</figure>
+<p>Click on <strong>Add Trigger</strong> in the <strong>Schedules &amp; Triggers</strong> section located on the left side of the workflow page.</p>
+<figure class="align-default">
+<img alt="_images/22.png" src="_images/22.png" />
+</figure>
+<p>A pop-up window will appear. In the dropdown menu, select <strong>Scheduled</strong> as the trigger type.</p>
+<figure class="align-default">
+<img alt="_images/23.png" src="_images/23.png" />
+</figure>
+<p>By default, the <strong>Trigger Status</strong> is set to <strong>Active</strong>, the <strong>Trigger Type</strong> is set to <strong>Scheduled</strong>, and the <strong>Schedule Type</strong> is set to <strong>Simple</strong>. In the Simple mode, you can specify the number of days for the recurrence. If you select <strong>Advanced</strong>, you’ll also be able to specify the exact time for the trigger. You can optionally check the box next to <strong>Show cron syntax</strong> to view or customize the schedule using cron expressions. Select the appropriate <strong>Periodic</strong> option based on your requirement, then click <strong>Save</strong> to apply the recurring schedule for the workflow.</p>
+<p>If you need to pause the schedule, simply change the <strong>Trigger Status</strong> to <strong>Paused</strong>.</p>
+<figure class="align-default">
+<img alt="_images/24.png" src="_images/24.png" />
+</figure>
+</section>
+</section>
+<section id="sharing-the-catalog">
+<h2>Sharing the catalog<a class="headerlink" href="#sharing-the-catalog" title="Link to this heading"></a></h2>
+<p>If the client wants to share the catalog with themselves, click on ‘<strong>New Recipient</strong>’ then a new window will open.</p>
+<figure class="align-default">
+<img alt="_images/25.png" src="_images/25.png" />
+</figure>
+<p>Provide a recipient name, enter the sharing identifier, and provide any related comments. Once done click create.</p>
+<figure class="align-default">
+<img alt="_images/26.png" src="_images/26.png" />
+</figure>
+<section id="use-case">
+<h3>Use case:<a class="headerlink" href="#use-case" title="Link to this heading"></a></h3>
+<p>Let’s assume that a client wants to share some data with Matchbook in the workspace, and these are my inputs or input records.</p>
+<p><strong>Set Up the Recipient</strong></p>
+<ol class="arabic simple">
+<li><p>Go to Delta Sharing and set up the recipient. Matchbook will share the identifier with the client.</p></li>
+<li><p>Select a new recipient (e.g., Matchbook AI) and provide the data sharing identifier.</p></li>
+</ol>
+</section>
+</section>
+</section>
+<section id="share-data">
+<h1>Share Data<a class="headerlink" href="#share-data" title="Link to this heading"></a></h1>
+<p>Click on ‘<strong>Share Data</strong>’ to open a new screen.</p>
+<figure class="align-default">
+<img alt="_images/27.png" src="_images/27.png" />
+</figure>
+<p>Follow the specific format provided by Matchbook to ensure proper identification.</p>
+<figure class="align-default">
+<img alt="_images/28.png" src="_images/28.png" />
+</figure>
+<section id="share-name">
+<h2>Share Name<a class="headerlink" href="#share-name" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>The share name must follow a specific format.</p></li>
+<li><p>We provide the client with a subdomain to ensure we can identify the client at Matchbook.</p></li>
+<li><p>Click ‘Save and Continue.’</p></li>
+</ol>
+</section>
+<section id="adding-data-assets">
+<h2>Adding Data assets<a class="headerlink" href="#adding-data-assets" title="Link to this heading"></a></h2>
+<figure class="align-default">
+<img alt="_images/29.png" src="_images/29.png" />
+</figure>
+<p>Once you’ve added the required assets click Save and Continue.</p>
+</section>
+<section id="adding-notebooks">
+<h2>Adding Notebooks<a class="headerlink" href="#adding-notebooks" title="Link to this heading"></a></h2>
+<p>Add the required data assets and notebooks and click <strong>Save and Continue</strong> to proceed.</p>
+<p><strong>Note</strong>: Prepare the recipient to receive data and ensure they have the necessary access and setup.</p>
+<figure class="align-default">
+<img alt="_images/30.png" src="_images/30.png" />
+</figure>
+</section>
+<section id="add-recipient">
+<h2>Add Recipient<a class="headerlink" href="#add-recipient" title="Link to this heading"></a></h2>
+<p><strong>Recipient Preparation</strong></p>
+<ul class="simple">
+<li><p>Ensure the recipient is prepared to receive data.</p></li>
+</ul>
+<p><strong>Data Sharing</strong></p>
+<ul class="simple">
+<li><p>User shares data, typically sample data, identified with a client ID like MBQA1.</p></li>
+</ul>
+<p><strong>Asset Addition</strong></p>
+<ul class="simple">
+<li><p>Add assets to be shared, which could be any data set.</p></li>
+<li><p>Data is available within a specific schema, offering options to share either the schema or the table.</p></li>
+</ul>
+<p><strong>Granting Access</strong></p>
+<ul class="simple">
+<li><p>Perform the grant share action to provide access to the recipient.</p></li>
+<li><p>Verify the added recipient and perform the grant share action to grant access.</p></li>
+</ul>
+<p><strong>Confirmation</strong></p>
+<ul class="simple">
+<li><p>Confirm that Matchbook now has access to the shared data.</p></li>
+</ul>
+<p><strong>Process Establishment</strong></p>
+<p><strong>Customer’s Responsibilities</strong>:</p>
+<ul class="simple">
+<li><p>Follow the steps outlined to share data via Delta Sharing.</p></li>
+</ul>
+<p><strong>Our Responsibilities</strong>:</p>
+<ul class="simple">
+<li><p>Configure processes and setups based on the shared data.</p></li>
+</ul>
+<p><strong>Process Configuration</strong>:</p>
+<p><strong>Jobs Creation</strong></p>
+<ul class="simple">
+<li><p>Establish jobs such as cleanse, match, classify, enrich data, and refresh.</p></li>
+<li><p>Within each job, configure specific settings and parameters.</p></li>
+<li><p>Start with configuring the share name in the cleanse match job.</p></li>
+</ul>
+<p><strong>Note</strong>: This sharing process is manual, and our system will automatically generate a catalog linked to your client ID for seamless access. Each client will have a unique identifier.</p>
+<p>Delta Sharing enables the creation of larger workspaces that can be shared with customers or clients for enhanced collaboration and data accessibility.</p>
+<p>To view the table shared with you, follow these steps:</p>
+</section>
+</section>
+<section id="managing-the-key-vault">
+<h1>Managing the key vault<a class="headerlink" href="#managing-the-key-vault" title="Link to this heading"></a></h1>
+<ul class="simple">
+<li><p>Databricks does not facilitate the addition of secrets through the user interface. Therefore, options are available either via API or the CLI.</p></li>
+<li><p>We can organize secrets within scopes. Each scope can contain specific secrets tailored to individual clients. For instance, we’ll establish client-specific scopes where API keys and secrets will be managed. Let me demonstrate this by listing the secrets within a scope. I’ll specify the scope corresponding to the client’s name. Within this scope, we can manage and update various items such as tokens, API keys, and others.</p></li>
+</ul>
+</section>
+<section id="managing-auth-token">
+<h1>Managing Auth token<a class="headerlink" href="#managing-auth-token" title="Link to this heading"></a></h1>
+<ul class="simple">
+<li><p>This triggers a specific process automatically, namely the data enrichment process. To achieve this, we make calls to the Databricks REST API. The token used for this purpose can be generated directly from Databricks. It’s important to note that this token is specifically for the Databricks database and is not our own token. It is utilized solely to trigger their API.</p></li>
+</ul>
+</section>
+<section id="retrieving-the-token-for-the-client">
+<h1>Retrieving the Token for the Client<a class="headerlink" href="#retrieving-the-token-for-the-client" title="Link to this heading"></a></h1>
+<p>Each job generates a token at the outset, which is utilized throughout its execution. A new token is not generated multiple times during the job execution; instead, a new token is created only if the current one has expired. This ensures efficient token management and prevents unnecessary token creation.</p>
+<p>The output table will contain new records, and each new job will trigger automatically.</p>
+<section id="import-data">
+<h2>Import Data<a class="headerlink" href="#import-data" title="Link to this heading"></a></h2>
+<p>To import data from a source file into Matchbook AI, perform the following steps.</p>
+<ol class="arabic simple">
+<li><p>Log into platform and navigate to the Import Data section in the main menu.</p></li>
+</ol>
+<figure class="align-default">
+<img alt="_images/31.png" src="_images/31.png" />
+</figure>
+<ol class="arabic simple" start="2">
+<li><p>Click on the <strong>Import Data</strong> button and select the <strong>Import File</strong> option.</p></li>
+</ol>
+<figure class="align-default">
+<img alt="_images/32.png" src="_images/32.png" />
+</figure>
+<p>Note: By selecting Import Data, you have the option to import data through UI or automated import.</p>
+<ol class="arabic simple" start="3">
+<li><p>The Import Data dialog box is displayed.</p></li>
+</ol>
+<figure class="align-default">
+<img alt="_images/33.png" src="_images/33.png" />
+</figure>
+<ol class="arabic simple" start="4">
+<li><p>Select the file type of the file that you want to import data from.</p></li>
+</ol>
+<figure class="align-default">
+<img alt="_images/33.png" src="_images/33.png" />
+</figure>
+<p>Data can be imported from the following file types:</p>
+<ul class="simple">
+<li><p>Excel file</p></li>
+<li><p>CSV file</p></li>
+</ul>
+<p>Select the <strong>Import Type</strong>. This allows users to match and improve the imported data.</p>
+<p>There are two ways to import your data:</p>
+<ol class="lowerroman simple">
+<li><p><strong>Cleanse, Match &amp; Enrichment</strong>: This feature enables you to verify and align imported data with data from third-party providers to guarantee its correctness, utility, and precision. After the data has been verified and aligned, it is augmented with pertinent information sourced from third-party data providers.</p></li>
+</ol>
+<figure class="align-default">
+<img alt="_images/33.png" src="_images/33.png" />
+</figure>
+<ol class="lowerroman simple" start="2">
+<li><p><strong>Enrichment Only</strong>: This functionality permits the enhancement of data that has undergone cleaning and alignment through a comparison with data from third-party data providers. Subsequently, the data is enriched to enhance or expand its content with additional pertinent information from external referential sources. To select this option, perform the following steps.</p></li>
+</ol>
+<figure class="align-default">
+<img alt="_images/34.png" src="_images/34.png" />
+</figure>
+<p>Users can also import data by manually entering it as a single record, use the toggle button on the top to switch between <strong>Cleanse, Match &amp; Enrichment or Enrichment Only</strong>. The screenshot below displays the form to do Cleaning, Matching and Enrichment on a Single record. Users can manually enter the details on this screen.</p>
+<figure class="align-default">
+<img alt="_images/35.png" src="_images/35.png" />
+</figure>
+<p>The screenshot below displays the form to perform <strong>Enrichment Only</strong>, on a Single record. Users can manually enter the details on this screen.</p>
+<p>After selecting the required import type, click <strong>Next</strong> to proceed.</p>
+<figure class="align-default">
+<img alt="_images/34.png" src="_images/34.png" />
+</figure>
+<ol class="lowerroman simple" start="3">
+<li><p>To upload the source data file, click on the <strong>Browse</strong> button.</p></li>
+</ol>
+<figure class="align-default">
+<img alt="_images/36.png" src="_images/36.png" />
+</figure>
+<p>You can also select any existing templates to define the data import, by selecting it from the list of options provided in the Select File Template dropdown menu. Choose the file template. This allows users to save a mapping of the file in the Matchbook AI platform.</p>
+<p>Specify whether the source file contains headers by checking the <strong>Has Header</strong> checkbox. This lets the system know that the data mapping is to be performed based on the Header Name and not the position of data.</p>
+<p><strong>Note</strong>: If the input file does not contain headers, then the headers can be manually mapped during Data Mapping as an Input Header. For more information on how to add/modify input headers refer to the Data Mapping section of this guide.</p>
+<figure class="align-default">
+<img alt="_images/37.png" src="_images/37.png" />
+</figure>
+<p>Choose the file you want to import from its location on your system and click <strong>Next</strong>.</p>
+<p><strong>Note</strong>: For Importing the file, it is mandatory that the file is closed in the background.</p>
+<p>Select the required Sheet.</p>
+<p><strong>Note</strong>: This step is required Excel or CSV required formats, that may contain multiple sheets. This feature enables you to choose and import the specific sheet you need.</p>
+<figure class="align-default">
+<img alt="_images/38.png" src="_images/38.png" />
+</figure>
+</section>
+</section>
+<section id="process-enrichment-data">
+<h1>Process Enrichment Data<a class="headerlink" href="#process-enrichment-data" title="Link to this heading"></a></h1>
+<ul class="simple">
+<li><p>A Python script is crafted for each client, consolidating all necessary values such as MB_QA1, API keys, and secrets for initial configuration. This script automates the generation of required components. Clients will establish these jobs, enabling direct invocation of the REST API and eliminating the need for manual intervention entirely.</p></li>
+</ul>
+<p><strong>Enrichment Classes Optimization</strong></p>
+<p>This optimization focuses on completing three key tasks:</p>
+<ul class="simple">
+<li><p>Stage Table Optimization: Enhance the structure and performance of the stage table.</p></li>
+<li><p>Centralize All Parameters: Consolidate and organize all parameters in a centralized location for easier management.</p></li>
+</ul>
+<section id="optimization">
+<h2>Optimization<a class="headerlink" href="#optimization" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Optimize the structure and performance of the stage table.</p></li>
+<li><p>Centralize all parameters to facilitate easier management.</p></li>
+<li><p>Implement input merge updates.</p></li>
+</ul>
+<figure class="align-default">
+<img alt="_images/26.png" src="_images/26.png" />
+</figure>
+</section>
+<section id="run-jobs">
+<h2>Run Jobs<a class="headerlink" href="#run-jobs" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Navigate to the Jobs tab in the Jobs run section and select the client’s name.</p></li>
+<li><p>Click on the Workflow tab to access scripts that can be run manually or automatically.</p></li>
+</ul>
+<figure class="align-default">
+<img alt="_images/39.png" src="_images/39.png" />
+</figure>
+<p>Within the left-hand menu, locate and click on the Workflow tab. This tab provides scripts that can be run manually or automatically on a recurring basis.</p>
+<p><strong>Note</strong>: You can select the cluster on which to assign a job based on your requirements.</p>
+</section>
+<section id="assign-jobs-to-clients">
+<h2>Assign Jobs to Clients<a class="headerlink" href="#assign-jobs-to-clients" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>To assign the job to the client through Compute:</p></li>
+<li><p>Navigate to SQL Warehouse and select the Starter Warehouse.</p></li>
+<li><p>Share the script with the client and set up the workflow.</p></li>
+</ul>
+<p>Once these steps are completed, the job assignment process will be complete.</p>
+<figure class="align-default">
+<img alt="_images/39.png" src="_images/39.png" />
+</figure>
+</section>
+<section id="running-the-cleansematch-process">
+<h2>Running the Cleansematch Process<a class="headerlink" href="#running-the-cleansematch-process" title="Link to this heading"></a></h2>
+<section id="initial-setup">
+<h3>Initial Setup<a class="headerlink" href="#initial-setup" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>Cleansematch is the first mandatory process that should be run initially. Click on the <strong>Run Now</strong> button.</p></li>
+<li><p>Configure each task under the Tasks tab, ensuring all settings are correct.</p></li>
+</ol>
+</section>
+<section id="configuration-and-validation">
+<h3>Configuration and Validation<a class="headerlink" href="#configuration-and-validation" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Check the batch_size configuration (must be between 1 and 50). It will throw an error if not within this range.</p></li>
+<li><p>Validate the delta_sharing_mode configuration parameter.</p></li>
+<li><p>Ensure the share name matches the client_id.</p></li>
+</ul>
+<p>These steps will help ensure proper configuration and operation.</p>
+<figure class="align-default">
+<img alt="_images/40.png" src="_images/40.png" />
+</figure>
+<p><strong>Catalog and Table Management</strong></p>
+<ul class="simple">
+<li><p>If the catalog does not exist, it will be created automatically.</p></li>
+<li><p>If the destination_table is not available, clone the source table and add a Status column set to “NEW” by default.</p></li>
+</ul>
+<p>If the delta_sharing_mode configuration parameter is provided, it will validate the provider using delta_sharing_identifier. If a valid provider does not exist, an error will be thrown.</p>
+<p>When the client shares data using delta sharing, they need to ensure the share name matches the client_id. This is necessary to identify which share belongs to which client when multiple clients are sharing data with us. If the share name does not match the client_id, an error will be thrown.</p>
+<p>Once the share is identified, if the catalog does not exist, we will create it automatically.</p>
+<p>If the destination_table (where we will store the match output result) is not available:</p>
+<ul class="simple">
+<li><p>Clone the source table.</p></li>
+<li><p>Add a new column called Status and set its default value to “NEW”.</p></li>
+<li><p>This setup ensures that new records are automatically inserted with the status “NEW”.</p></li>
+<li><p>If the destination_table is available:</p></li>
+<li><p>We will sync the source_table and destination_table using the primary key provided by the user. We will match records and add any that do not exist in the destination_table.</p></li>
+<li><p>We will also sync records with status “ERROR” that have been updated in the source_table, updating them in the destination_table and setting their status to “NEW” for reprocessing. During the syncing between source_table and destination_table, we will save the current UTC timestamp in the table to use as a checkpoint for syncing records with status “ERROR” in the future.</p></li>
+</ul>
+<p>For all records in the destination_table:</p>
+<ul class="simple">
+<li><p>If a record is NEW and Tags is NULL or EMPTY, update Tags to NULL if it is EMPTY.</p></li>
+<li><p>If the Tags parameter is provided, update records with the provided value in Tags.</p></li>
+<li><p>If a record is not processed (Processed = False), consider it for Cleansematch processing.</p></li>
+</ul>
+<p>We will call the MatchEnrich API based on the batch_size value, creating chunks and invoking the API with parallelism determined by batch_size.</p>
+<p>After processing each chunk, we will update the results back to the destination_table.</p>
+<p>Upon completion of this process, we will automatically trigger the Process Enrichment Data job, but only if there is data to be processed.</p>
+<p>These steps ensure efficient API utilization and automation based on the data processing requirements.</p>
+<div class="table-wrapper docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>The catalog</p></td>
+<td><p>Unity catalog name where input data is available.
+If the mode is delta sharing, then the catalog belongs to where you want to store your output results.
+If the mode is direct, then the catalog belongs to where your input data is available and where you want to store the output result as well.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Client identifiers</p></td>
+<td><p>In Delta Sharing mode, each client is uniquely identified to facilitate data sharing and management.</p></td>
+</tr>
+<tr class="row-even"><td><p>Source schema</p></td>
+<td><p>The name of the schema where the source data is available.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Detailing data</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>Destination schema</p></td>
+<td><p>The name of the schema where you want to store the match output data.</p></td>
+</tr>
+<tr class="row-odd"><td><p>API URL</p></td>
+<td><p>This indicates that it is necessary to call Matchbook AI APIs.</p></td>
+</tr>
+<tr class="row-even"><td><p>Batch size</p></td>
+<td><p>The batch size, which allows for parallel Matchbook API calls, must be between 1 and 50.</p></td>
+</tr>
+<tr class="row-odd"><td><p>A primary key</p></td>
+<td><p>Column name from the source data that uniquely identifies each record across the entire dataset.
+This is essential for job functions such as making updates and ensuring dataset integrity.</p></td>
+</tr>
+<tr class="row-even"><td><p>An instance URL</p></td>
+<td><p>This indicates that calling Databricks’ REST APIs is necessary.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Note: This pertains to our instance, as it is running on our dataset.</p>
+<div class="table-wrapper docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Source schema</p></td>
+<td><p>The name of the schema where the source data is available.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Source table</p></td>
+<td><p>The name of the table where the source data is available for matching.</p></td>
+</tr>
+<tr class="row-even"><td><p>Column mapping</p></td>
+<td><p>The workflow needs to call the Matchbook API with specific fields.
+If your data does not have the exact columns required, you can create a mapping to align your columns with Matchbook AI’s conventions.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Parallel API calls</p></td>
+<td><p>The number of parallel Matchbook API calls to be made. The maximum allowed is 50.</p></td>
+</tr>
+<tr class="row-even"><td><p>Scrd ID</p></td>
+<td><p>Each record is associated with a source record ID for identification and tracking.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="id1">
+<h2>Process Enrichment Data<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<figure class="align-default">
+<img alt="_images/41.png" src="_images/41.png" />
+</figure>
+<p><strong>Note</strong>: To create a token for Databricks, click on the right-hand side menu, select Settings, navigate to Developer, and then click on Manage next to Access Tokens.</p>
+</section>
+<section id="downloading-matched-data">
+<h2>Downloading Matched Data<a class="headerlink" href="#downloading-matched-data" title="Link to this heading"></a></h2>
+<p>This job oversees the retrieval of manually reviewed and updated records from the Matchbook AI portal. It ensures that any data stewardship actions performed by users, such as corrections, approvals, or enhancements, are accurately reflected in the Snowflake environment.</p>
+<p>Navigate to the <strong>Matchbook AI portal</strong>, and from the <strong>left-hand menu</strong>, select <strong>Data Stewardship</strong>. Under this section, choose <strong>Low Confidence</strong> to access records that require manual review.</p>
+<figure class="align-default">
+<img alt="_images/42.png" src="_images/42.png" />
+</figure>
+<p>The <strong>Low Confidence</strong> section in data stewardship is designed to help users manage records that require manual review due to lower confidence scores. These are typically cases where automated rules don’t provide sufficient certainty for acceptance and need user intervention to ensure high data integrity.</p>
+<p>For example, if your <strong>Auto-Acceptance</strong> rule is configured to accept candidates with a <strong>confidence code of 8, 9, or 10</strong>, then any D&amp;B candidate with a <strong>confidence code of 7 or lower</strong> will be routed to the low confidence queue for review.</p>
+<p>Within this section, users have powerful tools to <strong>filter, accept, reject, and score</strong> records. To begin reviewing, navigate to the <strong>Order by Columns Equals</strong> field and select <strong>SrcRecordID</strong> — this may already be pre-selected by default. Once selected, a table of candidates will be displayed. To view and interact with a specific record, simply click on the <strong>‘+’ icon</strong> next to it, as shown in the screen below.</p>
+<figure class="align-default">
+<img alt="_images/43.png" src="_images/43.png" />
+</figure>
+<p>Under the <strong>Matchbook Rank</strong> column, you will see the <strong>score percentage</strong>. Based on the <strong>highest score</strong>, click on the <strong>black rectangle</strong> under the <strong>Match</strong> column, as shown below. Once selected, it will turn <strong>green</strong>, indicating that the record has been chosen.</p>
+<figure class="align-default">
+<img alt="_images/44.png" src="_images/44.png" />
+</figure>
+<p>Now, click on <strong>Update</strong> on the top-right to update the selected record.</p>
+<figure class="align-default">
+<img alt="_images/44.png" src="_images/44.png" />
+</figure>
+<p>Click on <strong>Dashboard</strong> from the <strong>left-hand menu</strong>. Under <strong>Background Process Statistics</strong>, you will see the <strong>execution time</strong> taken to complete the process.</p>
+<figure class="align-default">
+<img alt="_images/45.png" src="_images/45.png" />
+</figure>
+<p>After manually performing data stewardship for low-confidence matching candidates in the MatchbookAI portal, we wait for the batch process to upload the manually matched data to the backend.</p>
+<p>Only after this step, we run the Download Matched Data workflow. This ensures that all updated matches, including those manually curated, are included in the download.</p>
+<figure class="align-default">
+<img alt="_images/46.png" src="_images/46.png" />
+</figure>
+<p>Following the enrichment process, we then download the matched data. For example, if a specific record previously had no matches, it may now have multiple matched candidates, and a corresponding DUNS number will be generated as part of the enriched output.</p>
+</section>
+</section>
+<section id="monitoring">
+<h1>Monitoring<a class="headerlink" href="#monitoring" title="Link to this heading"></a></h1>
+<p>By integrating the Monitoring workflow with the Databricks environment, organizations can efficiently automate the process of tracking and managing data operations. This setup involves invoking two critical APIs—one for Download Monitoring Notifications and another for Download Transfer DUNS output. These API calls are orchestrated through a Databricks Workflow, which triggers the execution of a notebook that handles the API logic and writes the resulting data into designated Delta tables. This enables real-time visibility into data movements and provides clients with structured outputs that can be leveraged for further processing, auditing, or analytics.</p>
+<p>For the Databricks implementation, the solution is organized into three main components:</p>
+<ol class="arabic simple">
+<li><p><strong>Integration Testing</strong>: This component is responsible for securely managing the credentials required to make API calls. Using Databricks Secret Scopes, we store and retrieve critical values such as the client ID, API key, API secret, and the backend API endpoint (i.e., the Matchbook server API). These secrets are accessed within the notebook during execution, allowing the workflow to authenticate securely and interact with the APIs.</p></li>
+</ol>
+<p>On the Databricks dashboard, click <strong>Workflows</strong> from the left-hand menu, then select the job you want to run.</p>
+<figure class="align-default">
+<img alt="_images/47.png" src="_images/47.png" />
+</figure>
+<p>Click on + <strong>Add task</strong>.</p>
+<figure class="align-default">
+<img alt="_images/48.png" src="_images/48.png" />
+</figure>
+<p>From the right-hand menu, click on Run now as shown in the screen below:</p>
+<figure class="align-default">
+<img alt="_images/49.png" src="_images/49.png" />
+</figure>
+<p>The monitoring task runs successfully and displays a <strong>“Succeeded”</strong> message upon completion.</p>
+<figure class="align-default">
+<img alt="_images/50.png" src="_images/50.png" />
+</figure>
+<ol class="arabic simple" start="2">
+<li><p><strong>Monitoring Notebook</strong>: This notebook contains the main logic of the monitoring workflow. It consists of three key functions:</p></li>
+</ol>
+<ul class="simple">
+<li><p><strong>Access Token Generation</strong>: This function generates an <strong>access token</strong> that is required to authenticate API calls with the Matchbook server.</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>Download Monitoring Notification API Call</strong>: Once the access token is obtained, the second function uses it to call the <strong>DownloadMonitoringNotification API</strong>. The response, typically a large JSON payload, is written into the first target Delta table.</p></li>
+<li><p><strong>Download Transfer DUNS API Call</strong>: The third function makes a call to the <strong>DownloadTransferDUNS API</strong>, and the response from this call is written into a second Delta table.</p></li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="3">
+<li><p><strong>Workflow Execution and Testing</strong>:</p></li>
+</ol>
+<p>From the left-hand menu, select <strong>SQL Editor</strong>, then click the <strong>Run All</strong> button. This will execute the queries sequentially, one by one.</p>
+<figure class="align-default">
+<img alt="_images/51.png" src="_images/51.png" />
+</figure>
+<p>Once the workflow is executed:</p>
+<p>When the first command is run, the <strong>DownloadMonitoringNotification API</strong> call runs successfully using the access token. The JSON response is written directly to the DOWNLOAD_MONITORING_OUTPUT Delta table.</p>
+<figure class="align-default">
+<img alt="_images/52.png" src="_images/52.png" />
+</figure>
+<p>When the second command is run, the <strong>DownloadTransferDUNS API</strong> call follows, and its response is written into the DOWNLOAD_TRANSFER_DUNS_OUTPUT Delta table.</p>
+<figure class="align-default">
+<img alt="_images/53.png" src="_images/53.png" />
+</figure>
+<p>The output tables are:</p>
+<ol class="arabic simple">
+<li><p><strong>DOWNLOAD_MONITORING_OUTPUT</strong>: This table contains the full JSON payload from the first API.</p></li>
+<li><p><strong>DOWNLOAD_TRANSFER_DUNS_OUTPUT</strong>: This table contains the response from the second API call.</p></li>
+</ol>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          <a class="prev-page" href="index.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Home</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2025, Hera
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Navigating Databricks and Delta Sharing</a><ul>
+<li><a class="reference internal" href="#retrieve-the-sharing-identifier">Retrieve the Sharing Identifier</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#creating-and-sharing-catalogs">Creating and Sharing Catalogs</a><ul>
+<li><a class="reference internal" href="#create-separate-catalogs">Create Separate Catalogs</a></li>
+<li><a class="reference internal" href="#task-scheduling-workflows">Task Scheduling / Workflows</a><ul>
+<li><a class="reference internal" href="#how-to-start-the-workflow"><em>How to start the workflow</em></a></li>
+<li><a class="reference internal" href="#how-to-schedule-recurring-workflow-run"><em>How to schedule recurring workflow run</em></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#sharing-the-catalog">Sharing the catalog</a><ul>
+<li><a class="reference internal" href="#use-case">Use case:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#share-data">Share Data</a><ul>
+<li><a class="reference internal" href="#share-name">Share Name</a></li>
+<li><a class="reference internal" href="#adding-data-assets">Adding Data assets</a></li>
+<li><a class="reference internal" href="#adding-notebooks">Adding Notebooks</a></li>
+<li><a class="reference internal" href="#add-recipient">Add Recipient</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#managing-the-key-vault">Managing the key vault</a></li>
+<li><a class="reference internal" href="#managing-auth-token">Managing Auth token</a></li>
+<li><a class="reference internal" href="#retrieving-the-token-for-the-client">Retrieving the Token for the Client</a><ul>
+<li><a class="reference internal" href="#import-data">Import Data</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#process-enrichment-data">Process Enrichment Data</a><ul>
+<li><a class="reference internal" href="#optimization">Optimization</a></li>
+<li><a class="reference internal" href="#run-jobs">Run Jobs</a></li>
+<li><a class="reference internal" href="#assign-jobs-to-clients">Assign Jobs to Clients</a></li>
+<li><a class="reference internal" href="#running-the-cleansematch-process">Running the Cleansematch Process</a><ul>
+<li><a class="reference internal" href="#initial-setup">Initial Setup</a></li>
+<li><a class="reference internal" href="#configuration-and-validation">Configuration and Validation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id1">Process Enrichment Data</a></li>
+<li><a class="reference internal" href="#downloading-matched-data">Downloading Matched Data</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#monitoring">Monitoring</a></li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="_static/jquery.js?v=5d32c60e"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+    <script src="_static/documentation_options.js?v=f2a433a1"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/scripts/furo.js?v=5fa4622c"></script>
+    </body>
+</html>
